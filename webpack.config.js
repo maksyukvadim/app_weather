@@ -1,9 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
-module.exports = {
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+webpackConfig = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    app: './app.js',
+    index: './index.js',
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -14,26 +16,27 @@ module.exports = {
     contentBase: path.resolve(__dirname, './src'),
   },
   module: {
-      loaders: [
+  rules:[
     {
       loader: "babel-loader",
-
-      // Skip any files outside of your project's `src` directory
       include: [
         path.resolve(__dirname, "src"),
       ],
       exclude: [
         path.resolve(__dirname, "node_modules"),
       ],
-
-      // Only run `.js` and `.jsx` files through Babel
       test: /\.jsx?$/,
-
-      // Options to configure babel with
       query: {
         plugins: ['transform-runtime'],
       }
     },
+  { test: /\.styl$/, loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!stylus-loader' }) },
+  { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }) },
+]
+},
+plugins: [
+    new ExtractTextPlugin('css/all.css'),
   ]
-}
 };
+
+module.exports = webpackConfig;
