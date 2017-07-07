@@ -17,13 +17,13 @@ class LiveSearch extends Component {
 
   render() {
     const { results, pickItem } = this.props;
-    console.log(results);
+    console.log('12',results);
     return (
       <div>
         <input type="text" onChange={::this.change} />
         <ul>
           {results.map(item =>
-            <li onClick={this.pickTown.bind(this, item)}>
+            <li key={item.formatted_address} onClick={this.pickTown.bind(this, item)}>
               {item.formatted_address}
             </li>
           )}
@@ -32,7 +32,7 @@ class LiveSearch extends Component {
     );
   }
   static defaultProps = {
-    results: [1, 3, 4]
+    results: []
   };
 }
 LiveSearch.propTypes = {

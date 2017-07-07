@@ -10,8 +10,8 @@ console.log(searchActions);
 class SearchContainer extends Component {
     render() {
         
-        const { searchTown, towns, getWeather } = this.props;
-        console.log(this.props.town);
+        const { searchTown, towns, getWeather, town } = this.props;
+        console.log(town);
         return (
             <div>
                 <LiveSearch handleChange={searchTown} results={ towns.results } pickItem={getWeather} />
