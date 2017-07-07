@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Button from "./components/Button/Button";
-import Counter from "./components/Counter/Counter";
+import Init from "./components/Init/Init";
 import SearchContainer from './containers/SearchContainer';
 class App extends Component {
   render() {
     return (
       <div>
-        <Counter />
+      <Init />
         <SearchContainer />
         <Button label="Название" btnName="Кликни" />
       </div>
