@@ -15,6 +15,7 @@ webpackConfig = {
   devServer: {
     contentBase: path.resolve(__dirname, "./src")
   },
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
