@@ -6,12 +6,11 @@ import LiveSearch from "../components/LiveSearch/LiveSearch";
 
 console.log(searchActions);
 
-@connect(( state ) => ({ towns:state.search.towns, town: state.weather.town }), {...searchActions, ...weatherActions})
+@connect(( state ) => ({ towns:state.search.towns }), {...searchActions, ...weatherActions})
 class SearchContainer extends Component {
     render() {
         
-        const { searchTown, towns, getWeather, town } = this.props;
-        console.log(town);
+        const { searchTown, towns, getWeather } = this.props;
         return (
             <div>
                 <LiveSearch handleChange={searchTown} results={ towns.results } pickItem={getWeather} />

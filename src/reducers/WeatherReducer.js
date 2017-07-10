@@ -4,7 +4,16 @@ import weatherActions from "../actions/weatherActions";
 import { correctCoords } from '../utils';
 
 const initialState = {
-    town: {}
+    town: {
+      sys: {
+        country: ''
+      },
+      main: {
+        temp: '',
+        temp_min: '',
+        temp_max: ''
+      }
+    }
 };
 
 const WeatherReducer$ = Rx.Observable

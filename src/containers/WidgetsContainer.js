@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from "../state/RxState";
 import searchActions from "../actions/searchActions";
 import weatherActions from "../actions/weatherActions";
-import LiveSearch from "../components/WidgetsWeather/WidgetsWeather";
+import WidgetsWeather from "../components/WidgetsWeather/WidgetsWeather";
 
-@connect((state) => ({}))
+@connect((state) => ({town: state.weather.town}), weatherActions)
 class WidgetsContainer extends Component {
     render() {
+        const { town } = this.props;
         return (
             <div>
-               {this.props.children} 
+                <WidgetsWeather weather={town}/>
             </div>
         );
     }
