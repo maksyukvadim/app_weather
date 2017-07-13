@@ -4,15 +4,8 @@ import weatherActions from "../actions/weatherActions";
 import { correctCoords } from '../utils';
 
 const initialState = {
-    town: {
-      sys: {
-        country: ''
-      },
-      main: {
-        temp: '',
-        temp_min: '',
-        temp_max: ''
-      }
+    towns: {
+      list:[]
     }
 };
 
@@ -22,9 +15,9 @@ const WeatherReducer$ = Rx.Observable
     weatherActions.getWeather.flatMap((coords) => {
       console.log(coords.lat.toFixed(2));
   return Rx.Observable
-    .ajax({ url:`http://api.openweathermap.org/data/2.5/weather?lat=${correctCoords(coords.lat.toFixed(2))}&lon=${correctCoords(coords.lng.toFixed(1))}&APPID=${API_KEY_WEATHER} `, crossDomain: true })
+    .ajax({ url:`http://api.openweathermap.org/data/2.5/forecast?lat=${correctCoords(coords.lat.toFixed(2))}&lon=${correctCoords(coords.lng.toFixed(1))}&APPID=${API_KEY_WEATHER} `, crossDomain: true })
     .retryWhen(err$ => [])
-    .map(payload => state => ({...state, town: payload.response }))
+    .map(payload => state => ({...state, towns: payload.response }))
 })
   );
 

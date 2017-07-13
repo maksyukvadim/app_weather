@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { converKelvinToCels } from '../../utils';
+import { converKelvinToCels, getDate } from '../../utils';
+import './widgets-weather.styl';
 
 class WidgetsWeather extends Component {
     render() {
         const { weather, temperature } = this.props;
-        console.log(this.props.weather);
+
         return (
-            <div>
+            <div className='widget-weather__wrap'>
                 <div>
-                    <span>Страна: {weather.sys.country}</span><br/>
+                    <span>Дата:{weather.dt_txt}</span><br/>
                     <span>Температура: {converKelvinToCels(weather.main.temp)} °C</span><br/>
                     <span>min: {converKelvinToCels(weather.main.temp_min)} </span>
                     <span>max: {converKelvinToCels(weather.main.temp_max)}</span><br/>

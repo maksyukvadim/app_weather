@@ -4,8 +4,6 @@ import searchActions from "../actions/searchActions";
 import weatherActions from "../actions/weatherActions";
 import LiveSearch from "../components/LiveSearch/LiveSearch";
 
-console.log(searchActions);
-
 @connect(( state ) => ({ towns:state.search.towns }), {...searchActions, ...weatherActions})
 class SearchContainer extends Component {
     render() {

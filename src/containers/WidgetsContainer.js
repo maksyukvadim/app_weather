@@ -5,13 +5,14 @@ import searchActions from "../actions/searchActions";
 import weatherActions from "../actions/weatherActions";
 import WidgetsWeather from "../components/WidgetsWeather/WidgetsWeather";
 
-@connect((state) => ({town: state.weather.town}), weatherActions)
+@connect((state) => ({towns: state.weather.towns}), weatherActions)
 class WidgetsContainer extends Component {
     render() {
-        const { town } = this.props;
+        const { list } = this.props.towns;
+
         return (
             <div>
-                <WidgetsWeather weather={town}/>
+                {list.map((town) => <WidgetsWeather weather={town}/>)}               
             </div>
         );
     }
