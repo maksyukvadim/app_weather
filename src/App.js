@@ -1,16 +1,22 @@
 import React, { Component } from "react";
-import Button from "./components/Button/Button";
-import Init from "./components/Init/Init";
+import Init from "./components/Init";
 import SearchContainer from './containers/SearchContainer';
 import WidgetsContainer from './containers/WidgetsContainer';
+import { injectGlobal } from 'styled-components';
+
+injectGlobal`
+  body {
+  font-family: 'Roboto';
+  }
+`;
+
 class App extends Component {
   render() {
     return (
       <div>
-      <Init />
-        <WidgetsContainer />
+        <Init />
         <SearchContainer />
-        <Button label="Название" btnName="Кликни" />
+        <WidgetsContainer />
       </div>
     );
   }

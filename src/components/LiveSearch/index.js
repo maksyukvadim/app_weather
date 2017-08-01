@@ -1,33 +1,47 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import styled from 'styled-components';
+
+const InputSearch = styled.input`
+  color: green;
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  display: inline-block;
+`;
+
+const List = styled.ul``;
+
+const ListItem = styled.li``;
 
 class LiveSearch extends Component {
-  change(e) {
-    console.log(e.target.value);
+  change = (e) => {
     const { handleChange } = this.props;
     handleChange(e.target.value);
   }
 
   pickTown(item) {
-    console.log(item);
     this.props.pickItem(item.geometry.location)
-    
   }
-
-
+  
   render() {
     const { results, pickItem } = this.props;
-    console.log('12',results);
     return (
       <div>
-        <input type="text" onChange={::this.change} />
-        <ul>
+        <InputSearch 
+          type="text" 
+          onChange={this.change} 
+        />
+        <List>
           {results.map(item =>
-            <li key={item.formatted_address} onClick={this.pickTown.bind(this, item)}>
+            <ListItem 
+              key={item.formatted_address} 
+              onClick={this.pickTown.bind(this, item)}
+            >
               {item.formatted_address}
-            </li>
+            </ListItem>
           )}
-        </ul>
+        </List>
       </div>
     );
   }

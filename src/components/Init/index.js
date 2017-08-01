@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "../../state/RxState";
 import initActions from "../../actions/initActions";
 
@@ -7,9 +6,7 @@ import initActions from "../../actions/initActions";
 class Init extends Component {
   render() {
     return (
-      <div>
-
-      </div>
+      <div></div>
     );
   }
 }
