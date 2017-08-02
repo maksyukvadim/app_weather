@@ -1,14 +1,26 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { func, array } from "prop-types";
 import styled from 'styled-components';
 
 const InputSearch = styled.input`
-  color: green;
+  color: #1A237E;
   width: 100%;
-  height: 40px;
-  font-size: 20px;
-  display: inline-block;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 500;
+  box-shadow: ${haveResult => haveResult?'none':'0 4px 8px 0 rgba(0,0,0,0.2)'};
+  margin-top: 30vh;
+  box-sizing:border-box;
+  border: none;
+  padding: 5px;
+  outline: none;
+  
+  &:focus, 
+  &:hover {
+    box-shadow: ${haveResult => haveResult?'none':'2px 8px 16px 2px rgba(0,0,0,0.2)'};
+  }
 `;
+
 
 const List = styled.ul``;
 
@@ -26,23 +38,13 @@ class LiveSearch extends Component {
   
   render() {
     const { results, pickItem } = this.props;
+    console.log(results);
     return (
-      <div>
         <InputSearch 
           type="text" 
           onChange={this.change} 
+          haveResult={results.length > 0}
         />
-        <List>
-          {results.map(item =>
-            <ListItem 
-              key={item.formatted_address} 
-              onClick={this.pickTown.bind(this, item)}
-            >
-              {item.formatted_address}
-            </ListItem>
-          )}
-        </List>
-      </div>
     );
   }
   static defaultProps = {
@@ -50,9 +52,8 @@ class LiveSearch extends Component {
   };
 }
 LiveSearch.propTypes = {
-  handleChange: PropTypes.func,
-  results: PropTypes.array,
-  pickItem: PropTypes.func
+  handleChange: func,
+  results: array
 };
 
 export default LiveSearch;

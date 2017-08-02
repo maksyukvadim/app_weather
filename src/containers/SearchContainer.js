@@ -3,13 +3,13 @@ import { connect } from "../state/RxState";
 import searchActions from "../actions/searchActions";
 import weatherActions from "../actions/weatherActions";
 import LiveSearch from "../components/LiveSearch";
+import SearchList from "../components/SearchList";
 import styled, { keyframes } from 'styled-components';
 
 const WrapeerSearch = styled.div`
     position: relative;
     width: 70%;
     margin: 0 auto;
-    will-change: transform;
 `;
 
 @connect(
@@ -20,13 +20,15 @@ const WrapeerSearch = styled.div`
 class SearchContainer extends Component {
     render() {
         const { searchTown, towns, getWeather } = this.props;
+        console.log(towns);
         return (
             <WrapeerSearch animate={towns.length}>
                 <LiveSearch 
-                    handleChange={searchTown} 
-                    results={towns.results} 
+                    handleChange={searchTown}   
                     pickItem={getWeather} 
+                    results={towns.results}
                 />
+               <SearchList results={towns.results}  />
             </WrapeerSearch>
         );
     }
