@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { object } from 'prop-types';
 import { converKelvinToCels, getDate } from '../../utils';
-import './widgets-weather.styl';
+import styled from 'styled-components';
 
 const WidgetsWeather = ({weather}) => (
     <div className='widget-weather__wrap'>
@@ -14,7 +14,7 @@ const WidgetsWeather = ({weather}) => (
 );
 
 WidgetsWeather.propTypes = {
-    weather: PropTypes.object,
+    weather: object,
 }
 
 export default WidgetsWeather;

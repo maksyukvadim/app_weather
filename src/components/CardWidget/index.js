@@ -1,6 +1,7 @@
 import React from 'react';
 import { array } from 'prop-types';
 import WidgetsWeather from '../WidgetsWeather';
+import styled from 'styled-components';
 
 class CardWidget extends React.Component {
 
@@ -11,7 +12,6 @@ class CardWidget extends React.Component {
     hadleSwitchRight = (e) => {
         if( this.state.dateId + 1 > this.props.weatherByDate.length - 1 ) return false;
         this.setState({dateId: this.state.dateId + 1})
-        console.log(e);
     }
 
     hadleSwitchLeft = (e) => {
