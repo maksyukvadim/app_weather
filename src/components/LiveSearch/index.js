@@ -3,22 +3,17 @@ import { func, array } from "prop-types";
 import styled from 'styled-components';
 
 const InputSearch = styled.input`
-  color: #1A237E;
+  color: rgb(33,33,33);
   width: 100%;
   height: 50px;
   font-size: 25px;
   font-weight: 500;
-  box-shadow: ${haveResult => haveResult?'none':'0 4px 8px 0 rgba(0,0,0,0.2)'};
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
   margin-top: 30vh;
   box-sizing:border-box;
   border: none;
   padding: 5px;
   outline: none;
-  
-  &:focus, 
-  &:hover {
-    box-shadow: ${haveResult => haveResult?'none':'2px 8px 16px 2px rgba(0,0,0,0.2)'};
-  }
 `;
 
 
@@ -31,14 +26,10 @@ class LiveSearch extends Component {
     const { handleChange } = this.props;
     handleChange(e.target.value);
   }
-
-  pickTown(item) {
-    this.props.pickItem(item.geometry.location)
-  }
   
   render() {
     const { results, pickItem } = this.props;
-    console.log(results);
+    console.log(results.length > 0);
     return (
         <InputSearch 
           type="text" 

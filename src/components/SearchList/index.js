@@ -9,8 +9,16 @@ const List = styled.ul`
 
 const ListItem = styled.li`
     list-style: none;
-    padding: 10px 0;
-    background: #fff;    
+    padding: 10px 10px;
+    background: #fff;
+    color: rgb(33,33,33);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+    transition: background .15s linear;
+
+    &:hover {
+      background: rgb(238,238,238);
+      cursor: pointer;
+    }
 `;
 
 class SearchList extends Component {

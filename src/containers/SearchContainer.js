@@ -25,10 +25,9 @@ class SearchContainer extends Component {
             <WrapeerSearch animate={towns.length}>
                 <LiveSearch 
                     handleChange={searchTown}   
-                    pickItem={getWeather} 
                     results={towns.results}
                 />
-               <SearchList results={towns.results}  />
+               <SearchList results={towns.results}  pickItem={getWeather} />
             </WrapeerSearch>
         );
     }
