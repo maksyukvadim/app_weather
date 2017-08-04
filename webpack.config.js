@@ -26,24 +26,9 @@ webpackConfig = {
         query: {
           plugins: ["transform-runtime"]
         }
-      },
-      {
-        test: /\.styl$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader!stylus-loader"
-        })
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
-        })
       }
     ]
   },
-  plugins: [new ExtractTextPlugin("css/all.css")]
 };
 
 module.exports = webpackConfig;
