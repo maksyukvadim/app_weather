@@ -29,7 +29,6 @@ class LiveSearch extends Component {
   
   render() {
     const { results, pickItem } = this.props;
-    console.log(results.length > 0);
     return (
         <InputSearch 
           type="text" 

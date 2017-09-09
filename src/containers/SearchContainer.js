@@ -4,6 +4,7 @@ import searchActions from "../actions/searchActions";
 import weatherActions from "../actions/weatherActions";
 import LiveSearch from "../components/LiveSearch";
 import SearchList from "../components/SearchList";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import styled, { keyframes } from 'styled-components';
 
 const WrapeerSearch = styled.div`
@@ -20,7 +21,6 @@ const WrapeerSearch = styled.div`
 class SearchContainer extends Component {
     render() {
         const { searchTown, towns, getWeather } = this.props;
-        console.log(towns);
         return (
             <WrapeerSearch animate={towns.length}>
                 <LiveSearch 

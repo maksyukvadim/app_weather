@@ -5,6 +5,7 @@ import weatherActions from "../actions/weatherActions";
 import CardWidget from "../components/CardWidget";
 import { groupDataByDay } from '../utils';
 import styled from 'styled-components';
+import _ from 'lodash';
 
 const Container = styled.div`
     display:flex;
@@ -19,12 +20,14 @@ class WidgetsContainer extends Component {
 
     render() {
         const { list } = this.props.towns;
-
+        let listNode = [];
+        if(list.length > 0)
+            _.forIn(groupDataByDay(list), (value, key) => { 
+                listNode.push(<CardWidget key={key} weatherByDate={value} date={key.replace(/d/g,'.')} />);
+            });
         return (
             <Container>
-                {list.length > 0 && groupDataByDay(list)
-                    .map((town, id) =>
-                        <CardWidget key={id} weatherByDate={town} />)}
+                {listNode}
             </Container>
         );
     }

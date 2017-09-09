@@ -33,5 +33,5 @@ export function groupDataByDay(list) {
             enptArr[data].push(item);
         }
     });
-    return Object.values(enptArr);
+    return enptArr;
 }

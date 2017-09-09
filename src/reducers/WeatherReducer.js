@@ -13,7 +13,6 @@ const WeatherReducer$ = Rx.Observable
   .of(() => initialState)
   .merge(
     weatherActions.getWeather.flatMap((coords) => {
-      console.log(coords.lat.toFixed(2));
   return Rx.Observable
     .ajax({ url:`http://api.openweathermap.org/data/2.5/forecast?lat=${correctCoords(coords.lat.toFixed(2))}&lon=${correctCoords(coords.lng.toFixed(1))}&APPID=${API_KEY_WEATHER} `, crossDomain: true })
     .retryWhen(err$ => [])

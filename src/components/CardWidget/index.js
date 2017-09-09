@@ -2,45 +2,65 @@ import React from 'react';
 import { array } from 'prop-types';
 import WidgetsWeather from '../WidgetsWeather';
 import styled from 'styled-components';
+import localization from '../../localization';
 
 const CardWrap = styled.div`  
+    display:flex;
     background: #fff;
     box-sizing: border-box;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-    margin: 1% 2%;
+    margin: 1% 10%;
+    height: 200px;
+`;
+
+const TimePanel = styled.ul`  
+    background: #3F51B5;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 12%;
+    font-family: 'Play';
+    color: #fff;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;        
+`;
+
+const TimePanelDay = styled.li`
+    list-style:none;
+    font-weight: bold;
+    font-size: 3em;  
+`;
+
+const TimePanelMonth = TimePanelDay.extend`
+    font-size: 3.5em;
+    &:first-letter {
+        text-transform: uppercase;
+    }
+`;
+
+const WrapTab = styled.div`
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    width:100%;
 `;
 
 class CardWidget extends React.Component {
 
-    state = {
-        dateId: 0
-    };
-
-    hadleSwitchRight = (e) => {
-        if( this.state.dateId + 1 > this.props.weatherByDate.length - 1 ) return false;
-        this.setState({dateId: this.state.dateId + 1})
-    }
-
-    hadleSwitchLeft = (e) => {
-        if( this.state.dateId - 1 < 0 ) return false;
-        this.setState({dateId: this.state.dateId - 1})
-    }
-
     render() {
-        const { weatherByDate } = this.props;
-        const { dateId } = this.state;
-
+        const { weatherByDate, date } = this.props;
+        const dateArr = date.split('.');
         return (
             <CardWrap>
-                <WidgetsWeather 
-                    weather={weatherByDate[dateId]} 
-                />
-                <span onClick={this.hadleSwitchLeft}>
-                    <img src="../../icons/arrow_left.svg" alt="arrow_left"/>
-                </span>
-                <span onClick={this.hadleSwitchRight}>
-                    <img src="../../icons/arrow_right.svg" alt="arrow_right"/>
-                </span>
+                <TimePanel>
+                    <TimePanelDay>{parseInt(dateArr[2])}</TimePanelDay>                        
+                    <TimePanelMonth>{localization['month' + dateArr[1]]}</TimePanelMonth>
+                </TimePanel>                
+                <WrapTab>
+                    {weatherByDate.map((item,index) => <WidgetsWeather key={index} weather={item} />)}
+                </WrapTab>
             </CardWrap>
         );
     }
