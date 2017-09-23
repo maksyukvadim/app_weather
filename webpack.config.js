@@ -1,6 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 webpackConfig = {
   context: path.resolve(__dirname, "./src"),
@@ -9,12 +11,22 @@ webpackConfig = {
   },
   output: {
     path: path.resolve(__dirname, "./dist"),
-    filename: "[name].bundle.js",
-    publicPath: "/assets"
+    filename: "[name].bundle.js"
   },
   devServer: {
     contentBase: path.resolve(__dirname, "./src")
   },
+  plugins: [new HtmlWebpackPlugin({
+    title: "Weather",
+    template: path.resolve(__dirname, "./src/index.html")
+  }),
+  new CopyWebpackPlugin([
+    {
+      from: './icons',
+      to: './images'
+    },
+  ])
+],
   devtool: 'eval-source-map',
   module: {
     rules: [
@@ -26,7 +38,22 @@ webpackConfig = {
         query: {
           plugins: ["transform-runtime"]
         }
-      }
+      },
+      {
+        test: /\.(png|jpeg|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: './images/[name].[ext]'
+            }  
+          }
+        ]
+    },
+    {
+      test: /\.svg$/,
+      loader: 'svg-inline-loader'
+  }
     ]
   },
 };

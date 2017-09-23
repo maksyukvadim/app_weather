@@ -6,6 +6,7 @@ import CardWidget from "../components/CardWidget";
 import { groupDataByDay } from '../utils';
 import styled from 'styled-components';
 import _ from 'lodash';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const Container = styled.div`
     display:flex;
@@ -27,7 +28,13 @@ class WidgetsContainer extends Component {
             });
         return (
             <Container>
-                {listNode}
+                <ReactCSSTransitionGroup
+                    transitionName="cardWidget"
+                    transitionEnterTimeout={1000}
+                    transitionLeaveTimeout={1000}
+                >
+                    {listNode}
+                </ReactCSSTransitionGroup>
             </Container>
         );
     }

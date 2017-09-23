@@ -1,3 +1,3 @@
 import { createActions } from "../state/RxState";
 
-export default createActions(["searchTown"]);
+export default createActions(["searchTown", "activeTown", "clearTowns"]);

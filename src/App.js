@@ -3,11 +3,10 @@ import Init from "./components/Init";
 import SearchContainer from './containers/SearchContainer';
 import WidgetsContainer from './containers/WidgetsContainer';
 import { injectGlobal } from 'styled-components';
+import globalCss from './GlobalCss';
 
 injectGlobal`
-  body {
-  font-family: 'Roboto';
-  }
+  ${ globalCss }
 `;
 
 class App extends Component {

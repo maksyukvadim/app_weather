@@ -3,7 +3,8 @@ import { object } from 'prop-types';
 import ReactSVG from 'react-svg'
 import { converKelvinToCels, getDate } from '../../utils';
 import styled from 'styled-components';
-
+import  * as icon from '../../icons/icons';
+import asd from '../../icons/01d.svg';
 const Widget = styled.div`
     font-size: 20px;
     background: #f9f9f9;
@@ -14,52 +15,106 @@ const Widget = styled.div`
     margin-left: 2.2%;
     text-align: center;
     color: #3a3939;
-`;
-
-const IconWeather = styled.img`
-    width: 30px;
-    height: 30px;
+    
+    @media (max-width: 768px) {
+        width:100%;
+        margin-left: 0;
+        flex-direction: row;
+        height: 50px;
+        box-sizing: border-box;
+        border 1px 0 solid #3a3939;
+    }  
 `;
 
 const Time = styled.span`
     font-family:'Play';
     font-weight: bold;
     text-align: center;
-    font-size: 22px;
+    font-size: 1.2em;
+    
+    @media (max-width: 768px) {
+        margin: auto 0;
+        font-size: 1em;
+    }  
 `;
 
 const IconText = styled.div`
     display:flex;
     font-size: 0.8em;
     justify-content: space-around;
-    line-height: 1.5em;    
+    line-height: 1.5em;  
+    
+    @media (max-width: 768px) {
+        align-items: center;
+    }   
 `;
 
 const Temperature = styled.span`
     font-weight: bold;
     font-size: 2em;
     line-height: 1.5em;
+    
+    @media (max-width: 768px) {
+        font-size: 1.5em;
+    }  
 `;
 
 const IconTextCenter = IconText.extend`
     justify-content: center;    
 `;
 
+const Icon = styled.div`
+    display: flex;
+    padding-top: 15px;
+    justify-content:center;
+    & svg {
+        width: 40px;
+        height: 40px;
+        fill: #3a3939;
+    }
+    
+    @media (max-width: 768px) {
+        padding-top: 5px;
+    }  
+`;
+
+const IconCels = Icon.extend`
+    padding-top: 0;
+    & svg {
+        width: 40px;
+        height: 40px;
+
+    }
+    @media (max-width: 768px) {
+        padding-top: 0px;
+    }  
+`;
+const IconLittle = Icon.extend`
+    padding-top: 0;
+    & svg {
+        width: 23px;
+        height: 23px;
+    }
+    @media (max-width: 768px) {
+        padding-top: 0px;
+    } 
+`;
+
 const WidgetsWeather = ({weather}) => (
     
     <Widget>
         <Time>{weather.dt_txt.split(' ')[1].slice(0, -3)}</Time>
-        <ReactSVG path={`../../icons/${weather.weather[0].icon}.svg`} style={{ width:35+'px', height:35+'px', fill:'#3a3939' }} />
+            <Icon dangerouslySetInnerHTML={{__html: icon[`icon_${weather.weather[0].icon}`]}}  />
         <IconTextCenter>
             <Temperature>{converKelvinToCels(weather.main.temp)}</Temperature>   
-            <ReactSVG path="../../icons/degrees-celcius.svg" style={{ width:45+'px', height:45+'px', fill:'#3a3939'}} />         
+            <IconCels dangerouslySetInnerHTML={{__html: icon.degrees_celcius}} />         
         </IconTextCenter>
         <IconText>
-            <ReactSVG path="../../icons/umbrella.svg" style={{ width:25+'px', height:25+'px', fill:'#3a3939' }}/>
+            <IconLittle dangerouslySetInnerHTML={{__html: icon.umbrella}} />
             <span>{weather.main.humidity}%</span>
         </IconText>
         <IconText>
-            <ReactSVG path="../../icons/wind.svg" style={{ width:25+'px', height:25+'px', fill:'#3a3939' }}/>
+            <IconLittle dangerouslySetInnerHTML={{__html: icon.wind}} />
             <span>{Number(weather.wind.speed).toFixed(1)}м/с</span>
         </IconText>
     </Widget>
@@ -67,6 +122,6 @@ const WidgetsWeather = ({weather}) => (
 
 WidgetsWeather.propTypes = {
     weather: object
-}
+};
 
 export default WidgetsWeather;
