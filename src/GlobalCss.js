@@ -6,8 +6,9 @@ const globalCss = `
     .cardWidget {
     
         &-enter&-enter {
-            opacity: 0.1;
-            transition: opacity 1s ease-out;
+            opacity: 0;
+            transition: opacity .5s ease-out;
+            transition-delay:200ms;
         }
 
         &-enter&-enter-active {
