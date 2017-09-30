@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { func, array } from "prop-types";
 import styled from 'styled-components';
+import { Observable } from 'rxjs';
 
 const InputSearch = styled.input`
   color: rgb(33,33,33);
@@ -17,13 +18,8 @@ const InputSearch = styled.input`
 
 class LiveSearch extends Component {
 
-  state = {
-    inpVal:''
-  };
-
   componentDidMount() {
-    const searchInput = document.getElementById('searchInput');
-    searchInput.setAttribute('onclick', 'this.select();');
+    this.change();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,20 +29,21 @@ class LiveSearch extends Component {
       });
   }
 
-  change = (e) => {
+  change() {
+    const searchInput = document.getElementById('searchInput');
+    const keyPressInput$ = Observable.fromEvent(searchInput, 'keyup')
+      .map( e => e.target.value)
+      .filter((str) => str.length > 2)
+      .debounceTime(500)
+      .distinctUntilChanged();
     const { handleChange } = this.props;
-    const { value } = e.target;
-    this.setState({inpVal: value});
-    handleChange(value);
+    keyPressInput$.subscribe((name) => handleChange(name));
   };
   
   render() {
-    const { inpVal } = this.state;
     return (
         <InputSearch
-          type="text" 
-          onChange={this.change}
-          value={inpVal}
+          type="text"
           id={'searchInput'}
         />
     );
