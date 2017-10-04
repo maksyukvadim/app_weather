@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "../../state/RxState";
 import initActions from "../../actions/initActions";
 import styled from 'styled-components';
-import localization from '../../localization';
 import img from '../../images/background_main.jpg';
 const BackgroundMain = styled.div`
   position: fixed;
@@ -17,9 +16,6 @@ const BackgroundMain = styled.div`
 
 @connect(() => ({}), initActions)
 class Init extends Component {
-  componentWillMount() {
-    localization.setLanguage('ru');
-  }
 
   render() {
     return (

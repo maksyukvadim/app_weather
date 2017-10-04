@@ -18,12 +18,11 @@ const Container = styled.div`
 
 @connect((state) => ({ towns: state.weather.towns }), weatherActions)
 class WidgetsContainer extends Component {
-
     render() {
         const { list } = this.props.towns;
         let listNode = [];
         if(list.length > 0)
-            _.forIn(groupDataByDay(list), (value, key) => { 
+            _.forIn(groupDataByDay(list), (value, key) => {
                 listNode.push(<CardWidget key={key} weatherByDate={value} date={key.replace(/d/g,'.')} />);
             });
         return (

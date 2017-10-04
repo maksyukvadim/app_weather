@@ -3,6 +3,8 @@ import { array, func} from "prop-types";
 import styled from 'styled-components';
 
 const List = styled.ul`
+    position: absolute;
+    width: 100%;
     margin:0;
     padding:0;
 `;
@@ -27,10 +29,18 @@ const ListItem = styled.li`
 class SearchList extends Component {
 
   pickTown(item) {
-      const { activeTown, pickItem, clearTowns } = this.props;
+      const { pickItem, clearTowns, setDefaultInputValue, clearInput, hideGeolationPopup, positionPopupGeo } = this.props;
+      if(positionPopupGeo === '0') {
+          hideGeolationPopup();
+          setTimeout( () => {
+              pickItem(item.geometry.location);
+          }, 500);
+      } else {
+          pickItem(item.geometry.location);
+      }
       clearTowns();
-      pickItem(item.geometry.location);
-      activeTown(item.formatted_address);
+      setDefaultInputValue(item.formatted_address);
+      clearInput();
   }
   
   render() {
@@ -52,7 +62,10 @@ class SearchList extends Component {
 SearchList.propTypes = {
   results: array,
   pickItem: func,
-  clearTowns: func
+  clearTowns: func,
+  setDefaultInputValue: func,
+  clearInput: func,
+  hideGeolationPopup: func
 };
 
 SearchList.defaultProps = {

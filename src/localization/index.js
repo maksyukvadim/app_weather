@@ -13,7 +13,10 @@ export default new LocalizedStrings({
       month09:"sep",
       month10:"oct",
       month11:"nov",
-      month12:"dec"
+      month12:"dec",
+      want_get_weather: "Want to get the weather by",
+      yes: "Yes",
+      no: "No"
     },
     ru: {
       month01:"янв",
@@ -27,6 +30,9 @@ export default new LocalizedStrings({
       month09:"сен",
       month10:"окт",
       month11:"ноя",
-      month12:"дек"
+      month12:"дек",
+      want_get_weather: "Хотите получить погоду по",
+      yes: "Да",
+      no: "Нет"
     }
    });

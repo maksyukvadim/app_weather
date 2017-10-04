@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { func, array } from 'prop-types';
+import { func, array, string } from 'prop-types';
 import { connect } from "../state/RxState";
 import searchActions from "../actions/searchActions";
 import weatherActions from "../actions/weatherActions";
+import commonAction from "../actions/commonAction";
 import LiveSearch from "../components/LiveSearch";
 import SearchList from "../components/SearchList";
 import styled from 'styled-components';
@@ -25,23 +26,36 @@ const WrapeerSearch = styled.div`
         {
             towns: state.search.towns,
             list: state.weather.towns.list,
-            townInSearch: state.search.townInSearch
+            defaultValueInput: state.search.defaultValueInput,
+            positionPopupGeo: state.common.positionPopupGeo
         }
     ),
-        {...searchActions, ...weatherActions})
+        {...searchActions, ...weatherActions, ...commonAction})
 class SearchContainer extends Component {
+
+    clearInput = () => {
+        const inpSearch = document.getElementById('searchInput');
+        inpSearch.value = '';
+    };
+
     render() {
-        const { searchTown, towns, getWeather, list, activeTown, townInSearch, clearTowns } = this.props;
+        const { searchTown, towns, getWeather, list,
+                clearTowns, defaultValueInput, setDefaultInputValue, setGeoPopup, positionPopupGeo } = this.props;
         return (
                 <WrapeerSearch animate={list.length}>
                     <LiveSearch
                         handleChange={searchTown}
-                        townInSearch={townInSearch}
+                        defaultValueInput={defaultValueInput}
+                        clearTowns={clearTowns}
                     />
-                    <SearchList results={towns}
-                                pickItem={getWeather}
-                                activeTown={activeTown}
-                                clearTowns={clearTowns}
+                    <SearchList
+                        results={towns}
+                        pickItem={getWeather}
+                        clearTowns={clearTowns}
+                        setDefaultInputValue={setDefaultInputValue}
+                        clearInput={this.clearInput}
+                        hideGeolationPopup={() => setGeoPopup('-100%') }
+                        positionPopupGeo={positionPopupGeo}
                     />
                 </WrapeerSearch>
         );
@@ -53,7 +67,8 @@ SearchContainer.propTypes = {
     towns:array,
     getWeather:func,
     list: array,
-    activeTown: func
+    defaultValueInput: string,
+    setGeoPopup: func
 
 };
 
