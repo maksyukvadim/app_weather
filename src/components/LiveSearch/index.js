@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { func, array } from "prop-types";
+import { func, array, string, node } from "prop-types";
 import styled from 'styled-components';
 import { Observable } from 'rxjs';
 
@@ -14,6 +14,10 @@ const InputSearch = styled.input`
   border: none;
   padding: 5px;
   outline: none;
+  
+  @media (max-width: 768px) {
+    font-size: 20px;
+}  
 `;
 
 class LiveSearch extends Component {
@@ -22,29 +26,30 @@ class LiveSearch extends Component {
     this.change();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.townInSearch !== this.props.townInSearch)
-      this.setState({
-          inpVal: nextProps.townInSearch
-      });
-  }
-
   change() {
     const searchInput = document.getElementById('searchInput');
+    const { handleChange, clearTowns } = this.props;
     const keyPressInput$ = Observable.fromEvent(searchInput, 'keyup')
-      .map( e => e.target.value)
-      .filter((str) => str.length > 2)
-      .debounceTime(500)
-      .distinctUntilChanged();
-    const { handleChange } = this.props;
-    keyPressInput$.subscribe((name) => handleChange(name));
+      .map( e => e.target.value);
+    keyPressInput$
+        .filter((str) => str.length > 2)
+        .debounceTime(400)
+        .distinctUntilChanged()
+        .subscribe((name) => handleChange(name));
+
+      keyPressInput$
+          .filter((str) => str.length === 0)
+          .debounceTime(500)
+          .subscribe((name) => clearTowns());
   };
+
   
   render() {
     return (
         <InputSearch
           type="text"
           id={'searchInput'}
+          placeholder={this.props.defaultValueInput}
         />
     );
   }
@@ -52,7 +57,9 @@ class LiveSearch extends Component {
 
 LiveSearch.propTypes = {
   handleChange: func,
-  results: array
+  results: array,
+  defaultValueInput: string,
+  clearTowns: func
 };
 
 LiveSearch.defaultProps = {
