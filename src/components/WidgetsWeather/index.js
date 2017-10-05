@@ -47,6 +47,9 @@ const IconText = styled.div`
     @media (max-width: 768px) {
         align-items: center;
     }   
+    @media (min-width: 769px) and (max-width: 1010px) {;
+		font-size: 0.6em;
+	}
 `;
 
 const Temperature = styled.span`

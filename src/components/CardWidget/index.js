@@ -17,6 +17,10 @@ const CardWrap = styled.div`
 		flex-direction: column;
 		margin: 1% 0;
 	}
+	
+	@media (min-width: 769px) and (max-width: 1010px) {;
+		margin: 1% 3%;
+	}
 `;
 
 const TimePanel = styled.ul`  
