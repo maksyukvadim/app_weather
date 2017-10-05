@@ -16,7 +16,14 @@ export default new LocalizedStrings({
       month12:"dec",
       want_get_weather: "Want to get the weather by",
       yes: "Yes",
-      no: "No"
+      no: "No",
+      day1:"Monday",
+      day2:"Tuesday",
+      day3:"Wednesday",
+      day4:"Thursday",
+      day5:"Friday",
+      day6:"Saturday",
+      day0:"Sunday",
     },
     ru: {
       month01:"янв",
@@ -33,6 +40,13 @@ export default new LocalizedStrings({
       month12:"дек",
       want_get_weather: "Хотите получить погоду по",
       yes: "Да",
-      no: "Нет"
+      no: "Нет",
+      day1:"Понедельник",
+      day2:"Вторник",
+      day3:"Среда",
+      day4:"Четверг",
+      day5:"Пятница",
+      day6:"Суббота",
+      day0:"Воскресенье",
     }
    });

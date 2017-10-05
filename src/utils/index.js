@@ -33,3 +33,11 @@ export function groupDataByDay(list) {
     });
     return enptArr;
 }
+
+export function getDay(date) {
+    return (new Date(date)).getDay();
+}
+
+export function splitDot(data, ind) {
+    return data.split('.')[ind];
+}

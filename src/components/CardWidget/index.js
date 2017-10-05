@@ -1,6 +1,7 @@
 import React from 'react';
 import { array } from 'prop-types';
 import WidgetsWeather from '../WidgetsWeather';
+import { getDay, splitDot } from '../../utils';
 import styled from 'styled-components';
 import localization from '../../localization';
 
@@ -57,20 +58,31 @@ const WrapTab = styled.div`
     width:100%;
     
     @media (max-width: 768px) {
-    flex-direction: column;
+        flex-direction: column;
 }  
 `;
 
-class CardWidget extends React.Component {
+const DayOfWeek = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    
+    @media (max-width: 768px) {
+        font-size: 2em;
+        padding-right: 15px;
+    } 
+`;
 
+class CardWidget extends React.Component {
     render() {
         const { weatherByDate, date } = this.props;
-        const dateArr = date.split('.');
         return (
             <CardWrap>
                 <TimePanel>
-                    <TimePanelDay>{parseInt(dateArr[2])}</TimePanelDay>
-                    <TimePanelMonth>{localization['month' + dateArr[1]]}</TimePanelMonth>
+                    <DayOfWeek>{localization['day' + getDay(date)]}</DayOfWeek>
+                    <TimePanelDay>{parseInt(splitDot(date, 2))}</TimePanelDay>
+                    <TimePanelMonth>{localization['month' + splitDot(date, 1)]}</TimePanelMonth>
                 </TimePanel>
                 <WrapTab>
                     {weatherByDate.map((item,index) => <WidgetsWeather key={index} weather={item} />)}
