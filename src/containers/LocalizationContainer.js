@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { LOCALIZATION_LANGUAGES } from '../constants';
 
 const Wrapper = styled.div`
-    position: fixed;
+    position: absolute;
     right: 0;
     top: 0;
     width: 58px;
