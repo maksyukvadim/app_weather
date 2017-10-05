@@ -38,9 +38,15 @@ class SearchContainer extends Component {
         inpSearch.value = '';
     };
 
+    hidePopUpGeoposition = () => {
+        const { setGeoPopup, clearGeoposition } = this.props;
+        setGeoPopup('-100%');
+        setTimeout(clearGeoposition, 500);
+    };
+
     render() {
         const { searchTown, towns, getWeather, list,
-                clearTowns, defaultValueInput, setDefaultInputValue, setGeoPopup, positionPopupGeo } = this.props;
+                clearTowns, defaultValueInput, setDefaultInputValue, positionPopupGeo } = this.props;
         return (
                 <WrapeerSearch animate={list.length}>
                     <LiveSearch
@@ -54,7 +60,7 @@ class SearchContainer extends Component {
                         clearTowns={clearTowns}
                         setDefaultInputValue={setDefaultInputValue}
                         clearInput={this.clearInput}
-                        hideGeolationPopup={() => setGeoPopup('-100%') }
+                        hideGeolationPopup={this.hidePopUpGeoposition}
                         positionPopupGeo={positionPopupGeo}
                     />
                 </WrapeerSearch>
