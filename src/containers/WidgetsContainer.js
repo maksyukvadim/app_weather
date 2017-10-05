@@ -23,7 +23,7 @@ class WidgetsContainer extends Component {
         let listNode = [];
         if(list.length > 0)
             _.forIn(groupDataByDay(list), (value, key) => {
-                listNode.push(<CardWidget key={key} weatherByDate={value} date={key.replace(/d/g,'.')} />);
+                listNode.push(<CardWidget key={key} weatherByDate={value} date={key.replace(/d/g,'-')} />);
             });
         return (
             <Container>

@@ -38,6 +38,6 @@ export function getDay(date) {
     return (new Date(date)).getDay();
 }
 
-export function splitDot(data, ind) {
-    return data.split('.')[ind];
+export function splitDash(data, ind) {
+    return data.split('-')[ind];
 }

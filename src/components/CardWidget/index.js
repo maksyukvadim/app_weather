@@ -1,7 +1,7 @@
 import React from 'react';
 import { array } from 'prop-types';
 import WidgetsWeather from '../WidgetsWeather';
-import { getDay, splitDot } from '../../utils';
+import { getDay, splitDash } from '../../utils';
 import styled from 'styled-components';
 import localization from '../../localization';
 
@@ -81,8 +81,8 @@ class CardWidget extends React.Component {
             <CardWrap>
                 <TimePanel>
                     <DayOfWeek>{localization['day' + getDay(date)]}</DayOfWeek>
-                    <TimePanelDay>{parseInt(splitDot(date, 2))}</TimePanelDay>
-                    <TimePanelMonth>{localization['month' + splitDot(date, 1)]}</TimePanelMonth>
+                    <TimePanelDay>{parseInt(splitDash(date, 2))}</TimePanelDay>
+                    <TimePanelMonth>{localization['month' + splitDash(date, 1)]}</TimePanelMonth>
                 </TimePanel>
                 <WrapTab>
                     {weatherByDate.map((item,index) => <WidgetsWeather key={index} weather={item} />)}
