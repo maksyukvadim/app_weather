@@ -4,6 +4,7 @@ import { connect } from "../state/RxState";
 import commonAction from "../actions/commonAction";
 import localization from '../localization';
 import LocalizationControl from '../components/LocalizationControl';
+import { getDefaultLang } from '../utils';
 import styled from 'styled-components';
 import { LOCALIZATION_LANGUAGES } from '../constants';
 
@@ -28,6 +29,12 @@ const Wrapper = styled.div`
         }
     ), commonAction)
 class LocalizationContainer extends Component {
+
+    componentWillMount() {
+        const lang = getDefaultLang(LOCALIZATION_LANGUAGES);
+        this.props.setLang(lang);
+    }
+
     componentWillReceiveProps(nextProps) {
         const { activeLang, setLang } = this.props;
         if(nextProps.activeLang !== activeLang) {
@@ -42,14 +49,14 @@ class LocalizationContainer extends Component {
             <Wrapper>
                 {
                     LOCALIZATION_LANGUAGES
-                        .map( (lang) =>
-                            <LocalizationControl
-                                key={lang}
-                                active={activeLang === lang}
-                                onActive={() => setLang(lang)}
-                                value={lang.toUpperCase()}
-                            />
-                        )
+                    .map( (lang) =>
+                        <LocalizationControl
+                            key={lang}
+                            active={activeLang === lang}
+                            onActive={() => setLang(lang)}
+                            value={lang.toUpperCase()}
+                        />
+                    )
                 }
             </Wrapper>
         );

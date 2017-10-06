@@ -41,3 +41,9 @@ export function getDay(date) {
 export function splitDash(data, ind) {
     return data.split('-')[ind];
 }
+
+export function getDefaultLang(listLang) {
+    const browsLang = navigator.language.toLowerCase();
+    const lang = listLang.find(item => browsLang === item);
+    return lang ? lang : 'ru';
+}

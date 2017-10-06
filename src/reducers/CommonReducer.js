@@ -2,7 +2,7 @@ import Rx from "rxjs";
 import commonAction from "../actions/commonAction";
 const initialState = {
     positionPopupGeo: '-100%',
-    activeLang: 'ru'
+    activeLang: ''
 };
 
 const CommonReducer$ = Rx.Observable
