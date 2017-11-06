@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { array, func} from "prop-types";
+import { array, func } from "prop-types";
 import styled from 'styled-components';
 
 const List = styled.ul`
@@ -47,14 +47,14 @@ class SearchList extends Component {
     const { results } = this.props;
     return (
         <List>
-          {results.map(item =>
-            <ListItem 
-              key={item.formatted_address} 
-              onClick={this.pickTown.bind(this, item)}
-            >
-              {item.formatted_address}
-            </ListItem>
-          )}
+            {results.map(item =>
+                <ListItem
+                    key={item.formatted_address}
+                    onClick={this.pickTown.bind(this, item)}
+                >
+                    {item.formatted_address}
+                </ListItem>
+                )}
         </List>
     );
   }

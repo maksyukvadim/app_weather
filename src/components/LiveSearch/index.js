@@ -43,7 +43,6 @@ class LiveSearch extends Component {
           .subscribe((name) => clearTowns());
   };
 
-  
   render() {
     return (
         <InputSearch
