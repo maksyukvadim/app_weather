@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -25,9 +24,12 @@ webpackConfig = {
       from: './icons',
       to: './images'
     },
-  ])
+  ]),
+  new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+  }),
 ],
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-source-map',
   module: {
     rules: [
       {
@@ -57,5 +59,24 @@ webpackConfig = {
     ]
   },
 };
+
+if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            mangle: true,
+            compress: {
+                warnings: false,
+                pure_getters: true,
+                unsafe: true,
+                unsafe_comps: true,
+                screw_ie8: true
+            },
+            output: {
+                comments: false,
+            },
+        })
+    );
+}
 
 module.exports = webpackConfig;
